@@ -16,7 +16,7 @@ def index(request):
     return render(request,'index.html')
 
 def registration(request):
-    if request.method == "GET":
+    if request.method == "POST":
         user_form=UserCreationForm(request.POST)
         if user_form.is_valid():
             user_form.save()
