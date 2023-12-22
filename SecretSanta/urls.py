@@ -10,7 +10,8 @@ urlpatterns = [
     path('signup', views.signup),
     path('login', views.login),
     path('test_token', views.test_token),
-    path("users/", include("users.urls")),
+    path("users/boys/", include("users.urls")),
+    path("users/girls/", include("users.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
