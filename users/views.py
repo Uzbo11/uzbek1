@@ -4,8 +4,6 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from .models import UserProfile
 from .serializers import UserProfileSerializer
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
 
 @api_view(['GET'])
 def users_list(request):
