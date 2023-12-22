@@ -1,11 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from rest_framework import status
 from .models import UserProfile
 from .serializers import UserProfileSerializer
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse
 
 @api_view(['GET'])
 def users_list(request):
@@ -22,6 +21,8 @@ def registration(request):
         if user_form.is_valid():
             user_form.save()
             return HttpResponse("<h1>Registration successfully</h1>")
+    elif request.method == 'GET':
+        return render(request.GET)
     else:
         user_form=UserCreationForm()
     return render(request,'registration.html',{'user_form':user_form})
