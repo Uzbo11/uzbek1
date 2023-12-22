@@ -4,9 +4,24 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from .models import UserProfile
 from .serializers import UserProfileSerializer
+from django.shortcuts import render, HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 
 @api_view(['GET'])
 def users_list(request):
     users = UserProfile.objects.all()
     serializer = UserProfileSerializer(users, many=True)
     return Response({"users": serializer.data})
+
+def index(request):
+    return render(request,'index.html')
+
+def registration(request):
+    if request.method == "POST":
+        user_form=UserCreationForm(request.POST)
+        if user_form.is_valid():
+            user_form.save()
+            return HttpResponse("<h1>Registration successfully</h1>")
+    else:
+        user_form=UserCreationForm()
+    return render(request,'registration.html',{'user_form':user_form})
