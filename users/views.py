@@ -4,8 +4,7 @@ from .models import UserProfile
 from .serializers import UserProfileSerializer
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
+from django.http import HttpResponse
 
 @api_view(['GET'])
 def users_list(request):
@@ -21,7 +20,7 @@ def registration(request):
         user_form=UserCreationForm(request.POST)
         if user_form.is_valid():
             user_form.save()
-            return JsonResponse("<h1>Registration successfully</h1>")
+            return HttpResponse("<h1>Registration successfully</h1>")
     else:
         user_form=UserCreationForm()
     return render(request,'registration.html',{'user_form':user_form})
